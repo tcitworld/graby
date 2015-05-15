@@ -411,9 +411,9 @@ class Graby
                 if ($mimeInfo['type'] == 'image') {
                     $html = '<a href="'.$effective_url.'"><img src="'.$effective_url.'" alt="'.$mimeInfo['name'].'" /></a>';
                 } elseif ($mimeInfo['type'] == 'video') {
-                    $html = '<video controls src="'.$effective_url.'>No modern browser used</video>';
-                }
-
+                    $html = '<video controls src="'.$effective_url.'">Use a modern browser !</video>';
+                } elseif ($mimeInfo['type'] == 'audio') {
+                    $html = '<audio controls src="'.$effective_url.'">Use a modern browser !</audio>';
                 } else {
                     $html = '<a href="'.$effective_url.'">Download '.$mimeInfo['name'].'</a>';
                 }
