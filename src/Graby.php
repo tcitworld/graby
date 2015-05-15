@@ -410,6 +410,10 @@ class Graby
             case 'link':
                 if ($mimeInfo['type'] == 'image') {
                     $html = '<a href="'.$effective_url.'"><img src="'.$effective_url.'" alt="'.$mimeInfo['name'].'" /></a>';
+                } elseif ($mimeInfo['type'] == 'video') {
+                    $html = '<video controls src="'.$effective_url.'>No modern browser used</video>';
+                }
+
                 } else {
                     $html = '<a href="'.$effective_url.'">Download '.$mimeInfo['name'].'</a>';
                 }
