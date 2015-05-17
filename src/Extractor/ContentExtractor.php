@@ -9,6 +9,8 @@ use Graby\SiteConfig\SiteConfig;
 use Psr\Log\NullLogger;
 use Psr\Log\LoggerInterface;
 
+require("MediaExtractor.php");
+
 /**
  * Content Extractor.
  *
@@ -789,9 +791,19 @@ class ContentExtractor
             }
 
             // prevent self-closing iframes
+
+            // detect youtube & dailymotion & vimeo inline videos
             foreach ($this->body->getElementsByTagName('iframe') as $e) {
-                if (!$e->hasChildNodes()) {
+                if(getYouTubeIdFromURL($e->getAttribute('src'))) {
+                    $this->logger->log('debug','detected youtube video : ' . $e->getAttribute('src'));
+                }
+                elseif (preg_match('/^\/\/www.dailymotion.com/', $e->getAttribute('src'))) {
+                    $this->logger->log('debug','detected dailymotion video');
+                } elseif (preg_match('/^https:\/\/player.vimeo.com/', $e->getAttribute('src'))) {
+                    $this->logger->log('debug','detected vimeo video');
+                } elseif (!$e->hasChildNodes()) {
                     $e->appendChild($this->body->ownerDocument->createTextNode('[embedded content]'));
+
                 }
             }
 
