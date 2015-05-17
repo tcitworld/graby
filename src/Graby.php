@@ -18,7 +18,7 @@ use Psr\Log\NullLogger;
  */
 class Graby
 {
-    private $debug = false;
+    private $debug = true;
     private $logger;
 
     private $config = array();
@@ -34,7 +34,7 @@ class Graby
     {
         $resolver = new OptionsResolver();
         $resolver->setDefaults(array(
-            'debug' => false,
+            'debug' => true,
             'rewrite_relative_urls' => true,
             'singlepage' => true,
             'multipage' => true,
